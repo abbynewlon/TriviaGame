@@ -27,71 +27,73 @@
                 <h4>Queen Elizabeth's Corgi, Susan, once bit</h4>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-one">
-                <label class="form-check-label" for="inlineCheckbox1">A Post Man</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-one">
+                    <label class="form-check-label" for="inlineCheckbox1">A Post Man</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-one">
-                <label class="form-check-label" for="inlineCheckbox2">Victoria, Crown Princess of Sweden</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-one">
+                    <label class="form-check-label" for="inlineCheckbox2">Victoria, Crown Princess of Sweden</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-one">
-                <label class="form-check-label" for="inlineCheckbox3">An 8 Year Old Tourist</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-one">
+                    <label class="form-check-label" for="inlineCheckbox3">An 8 Year Old Tourist</label>
                 </div>
 
                 <h4>Corgis were originally breed to be </h4>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-two">
-                <label class="form-check-label" for="inlineCheckbox1">Hunting Dogs</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-two">
+                    <label class="form-check-label" for="inlineCheckbox1">Hunting Dogs</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-two">
-                <label class="form-check-label" for="inlineCheckbox2">Herding Dogs</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-two">
+                    <label class="form-check-label" for="inlineCheckbox2">Herding Dogs</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-two">
-                <label class="form-check-label" for="inlineCheckbox3">Compainion Dogs</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-two">
+                    <label class="form-check-label" for="inlineCheckbox3">Compainion Dogs</label>
                 </div>
 
                 <h4>How cute are Corgis?</h4>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-three">
-                <label class="form-check-label" for="inlineCheckbox1">Mildly Cute</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-three">
+                    <label class="form-check-label" for="inlineCheckbox1">Mildly Cute</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-three">
-                <label class="form-check-label" for="inlineCheckbox2">Absolutely Adorable!</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-three">
+                    <label class="form-check-label" for="inlineCheckbox2">Absolutely Adorable!</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-three">
-                <label class="form-check-label" for="inlineCheckbox3">Cats Are Better</label>
+                    <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-three">
+                    <label class="form-check-label" for="inlineCheckbox3">Cats Are Better</label>
                 </div>
 
                 <div>
-                <input type="submit" name="g" value="Submit" id="g">
+                    <input type="submit" name="g" value="Submit" id="g">
                 </div>
-
-
         </form>
            
         </div>
+
         <div id="end-section">
             <p>
                 All Done!
             </p>
-            <div id="cor">end</div>
+            <!--there should be a jquery or javascript method that dynamically changes these to the correct value when the final screen load. 
+            with document.getElementById("cor").textContent(correct) type thing-->
+            <div id="cor"></div>
             <div id="in"></div>
             <div id="un"></div>
         </div>
 
+        <!--this area should be the first screen-->
         <div id="to-start-section">
             <div>
                 <input type="submit" name="start" value="Start" id="d" >
@@ -106,47 +108,39 @@
             if($("#to-start-section").css("display")==="block"){
                 $("#to-start-section").css("display", "none");
                 $("#quiz-section").css("display", "block");
-            }else{
-                $("#to-start-section").css("display", "none");
-                $("#quiz-section").css("display", "none");
-                $("#end-section").css("display", "block");
+
             }
+            //the click event here and the .submit event below may be interacting with each other. It was not possible for me to figure out how to correct it. 
+            //maybe ideally there would be an else statement that could 
             event.preventDefault();
         });
 
 
-
+        //this area is timer
         var timerEnded = false;
         var endTime = 0;
         var time = 120;
-            //put setTimeout here potentially
         setInterval(function() {
             time--;
             console.log(time);
             $("#timer").text(time);
             if(time <= endTime){
                 timerEnded = true; 
+                //at this point there should be a method that would be able to submit the form(somehow). and also it should stop the timer.
             }
 
         }, 1000);
     
         
-        //the form and figuring out the number correct/not correct answeres
+        //this area checks if the answers from the form are correct
         var correct = 0;
         var incorrect = 0;
         var unanswered = 3;
         var answers = [["question-one", "option1"], ["question-two", "option2"], ["question-three", "option2"]]
 
+
         $( "form" ).submit(function( event ) {
-            console.log( $( this ).serializeArray() );
             checkAgainst($( this ).serializeArray())
-            console.log("correct" +correct);
-            console.log("incorrect"+incorrect);
-            
-            $("#end-section").css("display", "none");
-            $("#quiz-section").css("display", "none");
-            $("#start-section").css("display", "none");
-            console.log(unanswered);
             event.preventDefault();
         });
 
@@ -165,9 +159,8 @@
 
                         }
             }
-                console.log(didWin());
         }
-
+        //this function is not used but should be called in the check against so the final screen would tell the user if they won or not. 
         function didWin(){
             var results = false;
             if(correctj >1){
