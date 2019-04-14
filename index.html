@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Corgi Trivia</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    
+
+</head>
+<body>
+    <section id="main">
+    <div id="quiz-section">
+        <div class="container">
+            <div class="row" id="font">
+                Corgi Trivia!
+            </div>
+            <div class="row">
+                <img src="assets/images/corgi-transparent.png" alt="corgi hanging out" id="top-image">
+            </div>
+            <div class="row" id="timer">
+            </div>
+        </div>
+        <form>
+                <h4>Queen Elizabeth's Corgi, Susan, once bit</h4>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-one">
+                <label class="form-check-label" for="inlineCheckbox1">A Post Man</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-one">
+                <label class="form-check-label" for="inlineCheckbox2">Victoria, Crown Princess of Sweden</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-one">
+                <label class="form-check-label" for="inlineCheckbox3">An 8 Year Old Tourist</label>
+                </div>
+
+                <h4>Corgis were originally breed to be </h4>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-two">
+                <label class="form-check-label" for="inlineCheckbox1">Hunting Dogs</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-two">
+                <label class="form-check-label" for="inlineCheckbox2">Herding Dogs</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-two">
+                <label class="form-check-label" for="inlineCheckbox3">Compainion Dogs</label>
+                </div>
+
+                <h4>How cute are Corgis?</h4>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1" name="question-three">
+                <label class="form-check-label" for="inlineCheckbox1">Mildly Cute</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2" name="question-three">
+                <label class="form-check-label" for="inlineCheckbox2">Absolutely Adorable!</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3" name="question-three">
+                <label class="form-check-label" for="inlineCheckbox3">Cats Are Better</label>
+                </div>
+
+                <div>
+                <input type="submit" name="g" value="Submit" id="g">
+                </div>
+
+
+        </form>
+           
+        </div>
+        <div id="end-section">
+            <p>
+                All Done!
+            </p>
+            <div id="cor">end</div>
+            <div id="in"></div>
+            <div id="un"></div>
+        </div>
+
+        <div id="to-start-section">
+            <div>
+                <input type="submit" name="start" value="Start" id="d" >
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://code.jquery.com/jquery-3.4.0.js" integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=" crossorigin="anonymous"></script>
+    <script>
+        //starts game
+        $("#to-start-section").click(function(){ 
+            if($("#to-start-section").css("display")==="block"){
+                $("#to-start-section").css("display", "none");
+                $("#quiz-section").css("display", "block");
+            }else{
+                $("#to-start-section").css("display", "none");
+                $("#quiz-section").css("display", "none");
+                $("#end-section").css("display", "block");
+            }
+            event.preventDefault();
+        });
+
+
+
+        var timerEnded = false;
+        var endTime = 0;
+        var time = 120;
+            //put setTimeout here potentially
+        setInterval(function() {
+            time--;
+            console.log(time);
+            $("#timer").text(time);
+            if(time <= endTime){
+                timerEnded = true; 
+            }
+
+        }, 1000);
+    
+        
+        //the form and figuring out the number correct/not correct answeres
+        var correct = 0;
+        var incorrect = 0;
+        var unanswered = 3;
+        var answers = [["question-one", "option1"], ["question-two", "option2"], ["question-three", "option2"]]
+
+        $( "form" ).submit(function( event ) {
+            console.log( $( this ).serializeArray() );
+            checkAgainst($( this ).serializeArray())
+            console.log("correct" +correct);
+            console.log("incorrect"+incorrect);
+            
+            $("#end-section").css("display", "none");
+            $("#quiz-section").css("display", "none");
+            $("#start-section").css("display", "none");
+            console.log(unanswered);
+            event.preventDefault();
+        });
+
+        function checkAgainst(guesses){
+            for (let i = 0; i < guesses.length; i++) {
+                for (let j = i; j < answers.length ; j++) {
+                    if(guesses[i].name === answers[j][0]){
+                        unanswered--;
+                        if(guesses[i].value === answers[i][j]){
+                            correct++;
+                            break;
+                        } else{
+                            incorrect++;
+                        }
+                    }
+
+                        }
+            }
+                console.log(didWin());
+        }
+
+        function didWin(){
+            var results = false;
+            if(correctj >1){
+                results = true;
+            }
+            correct = 0;
+            unanswered = 3;
+            incorrect = 0;
+            return results;
+        }
+
+        
+
+    </script>
+</body>
+</html>
